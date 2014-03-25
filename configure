@@ -1,0 +1,23 @@
+echo Generating `pwd`/Makefile
+
+rm -f Makefile
+
+echo 'all:' >> Makefile
+echo $'\t make -C src' >> Makefile
+echo >> Makefile
+
+echo 'backup:' >> Makefile
+echo $'\t cp -rf . /tmp/blocksyturvy' >> Makefile
+echo $'\t cd /tmp/blocksyturvy && make clean' >> Makefile
+echo $'\t cd /tmp && tar -zcf blocksyturvy-`date "+%Y.%m.%d.%H.%M.%S"`.tar.gz blocksyturvy' >> Makefile
+echo $'\t cd /tmp && rm -rf blocksyturvy' >> Makefile
+echo $'\t mv /tmp/blocksyturvy*.gz ../backup' >> Makefile
+echo >> Makefile
+
+echo 'clean:' >> Makefile
+echo $'\t make -C src clean' >> Makefile
+echo >> Makefile
+
+cd src
+./configure
+cd ../
